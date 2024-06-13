@@ -12,16 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
             analyser.fftSize = 256;
 
             const dataArray = new Uint8Array(analyser.frequencyBinCount);
-            
+
             function detectBlow() {
                 analyser.getByteFrequencyData(dataArray);
                 const volume = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                
+
                 if (volume > 50) { // Adjust this threshold based on testing
                     candles.forEach(candle => candle.style.display = 'none');
-                    message.style.display = 'block';
+                    message.style.display = 'flex';
                 }
-                
+
                 requestAnimationFrame(detectBlow);
             }
 
